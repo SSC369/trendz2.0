@@ -70,7 +70,7 @@ class App extends Component {
       if (id === eachProduct.id) {
         const newItem = {
           ...eachProduct,
-          quantity: eachProduct.quantity - 1,
+          quantity: eachProduct.quantity > 1 && eachProduct.quantity - 1,
         }
         return newItem
       }
