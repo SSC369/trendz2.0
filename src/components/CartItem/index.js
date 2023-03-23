@@ -21,11 +21,8 @@ const CartItem = props => (
       }
 
       const onClickDecrementCartItemQuantity = () => {
-        if (quantity === 1) {
-          onRemoveCartItem()
-        } else {
           decrementCartItemQuantity(id)
-        }
+        
       }
 
       const onClickIncrementCartItemQuantity = () => {
