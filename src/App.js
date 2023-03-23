@@ -63,21 +63,33 @@ class App extends Component {
     })
     this.setState({cartList: newList})
   }
-
-  decrementCartItemQuantity = id => {
+  
+   decrementCartItemQuantity = id => {
     const {cartList} = this.state
-    const newList = cartList.map(eachProduct => {
-      if (id === eachProduct.id) {
-        const newItem = {
-          ...eachProduct,
-          quantity: eachProduct.quantity > 1 && eachProduct.quantity - 1,
+    const requiredItem = cartList.find(item => item.id === id)
+
+    if (requiredItem.quantity === 1) {
+      const filteredCartItems = cartList.filter(
+        eachProduct => eachProduct.id !== id,
+      )
+      this.setState({cartList: filteredCartItems})
+    } else {
+      const newList = cartList.map(eachProduct => {
+        if (id === eachProduct.id) {
+          if (eachProduct.quantity > 1) {
+            const newItem = {
+              ...eachProduct,
+              quantity: eachProduct.quantity > 1 && eachProduct.quantity - 1,
+            }
+            return newItem
+          }
         }
-        return newItem
-      }
-      return eachProduct
-    })
-    this.setState({cartList: newList})
+        return eachProduct
+      })
+      this.setState({cartList: newList})
+    }
   }
+
 
   render() {
     const {cartList} = this.state
